@@ -1,0 +1,18 @@
+{
+  "name": "輔仁聖博敏神學院",
+  "short_name": "輔神",
+  "description": "輔仁聖博敏神學院行動入口 — 招生、最新消息、研究與聯絡資訊",
+  "lang": "zh-Hant",
+  "dir": "ltr",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#113560",
+  "theme_color": "#1b4f8f",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
