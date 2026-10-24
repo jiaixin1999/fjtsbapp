@@ -3,75 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>神學呼召與潛能探索測驗</title>
+<title>神學呼召與潛能探索檢測</title>
 <style>
 :root{
-  --primary:#1e3a5f;--accent:#c29236;--bg:#f8fafc;--card-bg:#fff;--text-main:#334155;
-  --text-muted:#64748b;--border:#e2e8f0;--active-bg:#fdfaf3;--hover:#fafbfc;--soft:#f1f5f9;--gold-line:#f1e2c3;
-  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
-  color-scheme:light;
+  --primary:#1e3a5f;--primary-light:#2c4f7c;--accent:#c29236;--bg:#f8fafc;--card-bg:#fff;--text-main:#334155;
+  --text-muted:#64748b;--border:#e2e8f0;--active-bg:#fdfaf3;--hover:#fafbfc;--soft:#f1f5f9;--gold-line:#f1e2c3;--ok:#15803d;--on-primary:#fff;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --primary:#cfe0f5;--accent:#e0b04f;--bg:#0f172a;--card-bg:#1e293b;--text-main:#e2e8f0;
-    --text-muted:#94a3b8;--border:#334155;--active-bg:#2a2a22;--hover:#243247;--soft:#273449;--gold-line:#5a4a25;
+    --primary:#cfe0f5;--primary-light:#e3eefb;--accent:#e0b04f;--bg:#0f172a;--card-bg:#1e293b;--text-main:#e2e8f0;
+    --text-muted:#94a3b8;--border:#334155;--active-bg:#2a2a22;--hover:#243247;--soft:#273449;--gold-line:#5a4a25;--ok:#4ade80;--on-primary:#0f172a;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --primary:#cfe0f5;--accent:#e0b04f;--bg:#0f172a;--card-bg:#1e293b;--text-main:#e2e8f0;
-  --text-muted:#94a3b8;--border:#334155;--active-bg:#2a2a22;--hover:#243247;--soft:#273449;--gold-line:#5a4a25;
+  --primary:#cfe0f5;--primary-light:#e3eefb;--accent:#e0b04f;--bg:#0f172a;--card-bg:#1e293b;--text-main:#e2e8f0;
+  --text-muted:#94a3b8;--border:#334155;--active-bg:#2a2a22;--hover:#243247;--soft:#273449;--gold-line:#5a4a25;--ok:#4ade80;--on-primary:#0f172a;
   color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC","Microsoft JhengHei",Roboto,"Helvetica Neue",Arial,sans-serif}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{background:var(--bg);color:var(--text-main);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:16px}
-.container{background:var(--card-bg);width:100%;max-width:680px;border-radius:16px;box-shadow:0 10px 25px -5px rgba(0,0,0,.08);padding:32px 28px;border:1px solid var(--border)}
-.header-title{text-align:center;font-size:1.5rem;color:var(--primary);margin-bottom:6px}
-.header-desc{text-align:center;font-size:.95rem;color:var(--text-muted);margin-bottom:24px}
+.container{background:var(--card-bg);width:100%;max-width:680px;border-radius:20px;box-shadow:0 10px 30px -5px rgba(0,0,0,.08);padding:36px 30px;border:1px solid var(--border);overflow:hidden}
+#intro-panel{text-align:center;display:flex;flex-direction:column;align-items:center}
+.intro-icon-circle{width:72px;height:72px;background:var(--active-bg);border:2px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:20px}
+.intro-title{font-size:1.7rem;font-weight:800;color:var(--primary);line-height:1.35;margin-bottom:12px}
+.intro-subtitle{font-size:.98rem;color:var(--text-muted);line-height:1.6;margin-bottom:24px;max-width:520px}
+.intro-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px}
+.intro-tag{background:var(--soft);color:var(--primary-light);font-size:.85rem;font-weight:600;padding:6px 14px;border-radius:999px}
+.intro-info-box{background:var(--hover);border:1px solid var(--border);border-radius:12px;padding:16px 20px;width:100%;margin-bottom:28px;text-align:left}
+.intro-info-title{font-size:.88rem;font-weight:700;color:var(--primary);margin-bottom:8px}
+.intro-info-list{list-style:none;font-size:.88rem;color:var(--text-muted);line-height:1.6}
+.intro-info-list li{position:relative;padding-left:16px;margin-bottom:4px}
+.intro-info-list li::before{content:"•";position:absolute;left:0;color:var(--accent);font-weight:bold}
+.btn-start{background:var(--primary);color:var(--on-primary);font-size:1.05rem;font-weight:700;padding:14px 44px;border-radius:12px;border:none;cursor:pointer;transition:all .25s;width:100%;max-width:320px}
+.btn-start:hover{background:var(--primary-light);transform:translateY(-2px)}
+#quiz-panel{display:none}
+.header-title{text-align:center;font-size:1.35rem;color:var(--primary);margin-bottom:6px}
+.header-desc{text-align:center;font-size:.9rem;color:var(--text-muted);margin-bottom:20px}
 .progress-wrapper{margin-bottom:24px}
 .progress-info{display:flex;justify-content:space-between;font-size:.85rem;color:var(--text-muted);margin-bottom:6px;font-weight:500}
 .progress-bar-bg{height:8px;background:var(--border);border-radius:999px;overflow:hidden}
-.progress-bar-fill{height:100%;background:var(--accent);width:10%;transition:width .3s ease}
-.question-text{font-size:1.15rem;font-weight:600;color:var(--primary);line-height:1.5;margin-bottom:20px}
-.options-list{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
-.option-item{padding:14px 16px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s ease;background:var(--card-bg);font-size:.95rem;line-height:1.45}
+.progress-bar-fill{height:100%;background:var(--accent);width:9%;transition:width .3s}
+.question-text{font-size:1.15rem;font-weight:600;color:var(--primary);line-height:1.5;margin-bottom:8px}
+.question-hint{font-size:.85rem;color:var(--accent);font-weight:600;margin-bottom:16px}
+.options-list{display:flex;flex-direction:column;gap:12px;margin-bottom:24px;margin-top:16px}
+.question-hint:not(:empty)+.options-list{margin-top:0}
+.option-item{padding:14px 16px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;background:var(--card-bg);font-size:.95rem;line-height:1.45;display:flex;align-items:flex-start;gap:10px}
 .option-item:hover{border-color:var(--accent);background:var(--hover)}
 .option-item.selected{border-color:var(--accent);background:var(--active-bg);color:var(--primary);font-weight:500}
+.checkbox-indicator{width:18px;height:18px;border:2px solid var(--border);border-radius:4px;margin-top:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.option-item.selected .checkbox-indicator{background:var(--accent);border-color:var(--accent);color:#fff;font-size:12px;font-weight:bold}
 .nav-buttons{display:flex;justify-content:space-between}
 .btn{padding:10px 20px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;border:none;transition:all .2s}
 .btn-prev{background:transparent;color:var(--text-muted);border:1px solid var(--border)}
 .btn-prev:hover:not(:disabled){background:var(--soft)}
 .btn-prev:disabled{opacity:.4;cursor:not-allowed}
-.btn-next{background:var(--primary);color:var(--card-bg);margin-left:auto}
+.btn-next{background:var(--primary);color:var(--on-primary);margin-left:auto}
 .btn-next:disabled{opacity:.4;cursor:not-allowed}
 .result-panel{display:none;text-align:center}
 .badge-type{display:inline-block;background:var(--active-bg);color:var(--accent);border:1px solid var(--accent);padding:6px 14px;border-radius:20px;font-size:.9rem;font-weight:700;margin-bottom:12px}
 .result-title{font-size:1.45rem;color:var(--primary);margin-bottom:16px;font-weight:700}
-.result-card{background:var(--active-bg);border:1px solid var(--gold-line);border-radius:12px;padding:20px;text-align:left;margin-bottom:20px;line-height:1.7;font-size:.95rem}
+.result-card{background:var(--active-bg);border:1px solid var(--gold-line);border-radius:12px;padding:20px;text-align:left;margin-bottom:24px;line-height:1.7;font-size:.95rem}
 .card-subhead{font-weight:700;color:var(--primary);margin-bottom:6px}
-.dist-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:24px;text-align:left}
+.dist-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:30px;text-align:left}
 .dist-item{background:var(--card-bg);border:1px solid var(--border);padding:10px 14px;border-radius:8px;font-size:.85rem}
 .dist-item strong{display:block;color:var(--primary);font-size:.95rem}
-.restart-btn{background:var(--primary);color:var(--card-bg);padding:12px 28px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;border:none}
+.faq-section{text-align:left;margin-top:24px;border-top:2px dashed var(--border);padding-top:24px;margin-bottom:28px}
+.faq-header{font-size:1.15rem;font-weight:700;color:var(--primary);margin-bottom:14px}
+.faq-card{background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:16px;margin-bottom:14px}
+.faq-q{font-weight:700;color:var(--primary);margin-bottom:8px;font-size:.95rem}
+.faq-a{font-size:.9rem;line-height:1.6}
+.restart-btn{background:var(--primary);color:var(--on-primary);padding:12px 28px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;border:none}
+@media (max-width:600px){.container{padding:24px 18px}.intro-title{font-size:1.4rem}.dist-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="container">
+  <div id="intro-panel">
+    <div class="intro-icon-circle">📖</div>
+    <h1 class="intro-title">神學呼召與潛能探索檢測</h1>
+    <p class="intro-subtitle">讀神學院只是當牧師嗎？神學裝備對我到底有什麼意義？<br>花 3 分鐘透過日常生活情境，探索上帝放在你生命中的獨特恩賜與命定！</p>
+    <div class="intro-tags"><span class="intro-tag">✨ 解鎖恩賜特質</span><span class="intro-tag">🔍 破除神學迷思</span><span class="intro-tag">🧭 尋求未來方向</span></div>
+    <div class="intro-info-box">
+      <div class="intro-info-title">📋 檢測說明</div>
+      <ul class="intro-info-list">
+        <li><strong>題目數量</strong>：共 10 題特質情境單選 ＋ 1 題疑惑複選。</li>
+        <li><strong>耗時預計</strong>：約 3～4 分鐘。</li>
+        <li><strong>溫馨提醒</strong>：請放鬆心情，依照第一直覺選取最符合你當前心境的選項即可。</li>
+      </ul>
+    </div>
+    <button class="btn-start" onclick="startQuiz()">開啟探索之旅 ➔</button>
+  </div>
+
   <div id="quiz-panel">
-    <h1 class="header-title">神學呼召與潛能探索檢測</h1>
-    <p class="header-desc">透過 10 個核心情境，發現神放在你生命中的恩賜傾向與裝備契機。</p>
+    <h2 class="header-title">神學呼召與潛能探索檢測</h2>
+    <p class="header-desc">透過生活情境發掘神放在你身上的恩賜特質，並破除對神學院的疑惑！</p>
     <div class="progress-wrapper">
-      <div class="progress-info"><span id="progress-text">第 1 / 10 題</span><span id="progress-percent">10%</span></div>
+      <div class="progress-info"><span id="progress-text">第 1 / 11 題</span><span id="progress-percent">9%</span></div>
       <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-bar"></div></div>
     </div>
-    <div class="question-text" id="question-text">題目載入中⋯⋯</div>
+    <div class="question-text" id="question-text">載入題目中⋯⋯</div>
+    <div class="question-hint" id="question-hint"></div>
     <div class="options-list" id="options-container"></div>
     <div class="nav-buttons">
       <button class="btn btn-prev" id="prev-btn" disabled>上一題</button>
       <button class="btn btn-next" id="next-btn" disabled>下一題</button>
     </div>
   </div>
+
   <div class="result-panel" id="result-panel">
     <div class="badge-type">神學潛力畫像</div>
     <div class="result-title" id="result-title">解析中⋯⋯</div>
@@ -82,145 +123,141 @@ body{background:var(--bg);color:var(--text-main);min-height:100vh;display:flex;j
       <p id="result-encourage"></p>
     </div>
     <div class="dist-grid" id="dist-container"></div>
-    <button class="restart-btn" onclick="restartQuiz()">重新測驗</button>
+    <div class="faq-section">
+      <div class="faq-header">🧭 關於你的神學院疑惑・解惑指引</div>
+      <div id="faq-list"></div>
+    </div>
+    <button class="restart-btn" onclick="restartQuiz()">返回開始畫面</button>
   </div>
 </div>
+
 <script>
+const S=(q,a,b,c,d)=>({type:"single",q,ops:[{key:'A',text:a},{key:'B',text:b},{key:'C',text:c},{key:'D',text:d}]});
 const quizQuestions=[
-{q:"當你在教會聽道或自行讀經時，最容易點燃你熱情的是：",ops:[
-{type:'A',text:"看到經文如何激勵人悔改、跨出舒適圈去傳福音與服事。"},
-{type:'B',text:"發掘經文背後的歷史脈絡、原文意涵與嚴謹的神學架構。"},
-{type:'C',text:"經文帶來的醫治安慰，以及如何幫助身邊受傷掙扎的靈魂。"},
-{type:'D',text:"經文如何回應當前社會痛點、職場倫理與當代文化思潮。"}]},
-{q:"想像進入神學院生活，你最期待在哪個環節經歷自我突破？",ops:[
-{type:'A',text:"在週末的講台實習與第一線教會事工中磨練膽識與牧養心腸。"},
-{type:'B',text:"浸泡在圖書館裡，啃讀經典著作並學習希伯來文、希臘文。"},
-{type:'C',text:"在師生全體住宿與晨禱的緊密團契中，被修剪稜角、學會深層相愛。"},
-{type:'D',text:"與來自不同專業背景的同學激盪，探索基督信仰對世界的實質影響力。"}]},
-{q:"神學院不僅是「傳道人養成所」，你更傾向把神學裝備看作：",ops:[
-{type:'A',text:"領受差遣、預備奔赴廣大禾場的僕人演練。"},
-{type:'B',text:"建立一生純正信仰根基、抵禦世俗思潮的真理尋道之旅。"},
-{type:'C',text:"一場深刻的心靈更新與全人醫治，讓自己成為更健康的器皿。"},
-{type:'D',text:"跨領域的思維重組，學習用上帝的視角重新審視世界運作的法則。"}]},
-{q:"當你在信仰群體中看到問題或衝突時，你的直覺反應通常是：",ops:[
-{type:'A',text:"挽起袖子採取行動，主動補上缺口或嘗試開闢新的服事模式。"},
-{type:'B',text:"回到聖經原則反思根本原因，思考是否有體制或觀念上的偏差。"},
-{type:'C',text:"走到情緒受傷的人身邊，安靜傾聽陪伴，扮演使人和睦的橋樑。"},
-{type:'D',text:"評估背後的溝通機制與文化背景，尋求更具前瞻性的解決方案。"}]},
-{q:"面對神學院嚴謹的學術論文與課業要求，你的心態是：",ops:[
-{type:'A',text:"雖然充滿挑戰，但為了能更有力量地傳講真道，願意全力以赴。"},
-{type:'B',text:"非常興奮！這正是梳理清晰邏輯、深度建構論述的最佳操練。"},
-{type:'C',text:"把寫作當作向主獻上的禱告與反思，在文字中梳理生命的領悟。"},
-{type:'D',text:"期待透過嚴謹思辨，學會如何向懷疑論者或現代知識分子說清楚信仰。"}]},
-{q:"如果要選一門最想立即選修的神學院課程，你會選：",ops:[
-{type:'A',text:"《講道法與宣教策略》：學習精準有力的福音傳遞與禾場拓展。"},
-{type:'B',text:"《系統神學與原文釋經》：深入鑽研歷代教義與聖經核心思想。"},
-{type:'C',text:"《教牧輔導與靈修學》：探討心靈關顧、內在醫治與默想祈禱。"},
-{type:'D',text:"《公共神學與當代倫理》：探討信仰如何介入科技、生態與職場挑戰。"}]},
-{q:"在日常生活中，朋友或弟兄姊妹最常在什麼情況下主動來找你？",ops:[
-{type:'A',text:"需要號召推動一項計畫、需要方向指引或感到缺乏動力時。"},
-{type:'B',text:"遇到信仰疑難雜症、聖經難題，想找人理性討論時。"},
-{type:'C',text:"心情低落、遭遇挫折，需要一個安全不被論斷的耳朵傾聽時。"},
-{type:'D',text:"面臨職涯十字路口、人生重大選擇，需要宏觀視角分析時。"}]},
-{q:"關於讀神學院常面臨的「經濟與時間代價」，你的看法是：",ops:[
-{type:'A',text:"冒險正是信心的起點！神既然呼召，就必有超乎所求的恩典供應。"},
-{type:'B',text:"視為專注求學的必要代價，只要能把真理學透，非常值得。"},
-{type:'C',text:"這是學習過簡約生活、體會窮人與弱勢者心境的寶貴生命功課。"},
-{type:'D',text:"視為人生最關鍵的永恆投資，暫時的慢下腳步是為了走更長遠的路。"}]},
-{q:"你認為現今世代的教會與世界，最迫切需要什麼樣的神國工人？",ops:[
-{type:'A',text:"充滿熱忱與行動力、勇於走入未得之民的開拓型領袖。"},
-{type:'B',text:"扎根真理、能辨明時代虛妄思潮的教義守望者與學者。"},
-{type:'C',text:"具備同理心、能陪伴人心走過孤單與破碎的溫暖牧者。"},
-{type:'D',text:"能說當代語言、將福音轉化為文化影響力的橋樑型使者。"}]},
-{q:"閉上眼睛想像未來的你：完成神學院裝備後，最渴望看到的畫面是：",ops:[
-{type:'A',text:"帶領許多失喪靈魂歸主，建立充滿活力與差傳使命的信仰群體。"},
-{type:'B',text:"用清晰扎實的話語教學造就信徒，使神兒女不再被異教之風搖動。"},
-{type:'C',text:"陪伴許多破碎疲憊的生命重拾尊嚴與喜樂，見證基督的慈愛。"},
-{type:'D',text:"激勵各行各業的信徒在職場活出天國價值，翻轉周遭文化與社群。"}]}
+S("當你在教會聽道或自行讀經時，最容易點燃你熱情的是：","看到經文如何激勵人悔改、跨出舒適圈去傳福音與服事。","發掘經文背後的歷史脈絡、原文意涵與嚴謹的神學架構。","經文帶來的醫治安慰，以及如何幫助身邊受傷掙扎的靈魂。","經文如何回應當前社會痛點、職場倫理與當代文化思潮。"),
+S("想像進入神學院生活，你最期待在哪個環節經歷自我突破？","在週末的講台實習與第一線教會事工中磨練膽識與牧養心腸。","浸泡在圖書館裡，啃讀經典著作並學習希伯來文、希臘文。","在師生全體住宿與晨禱的緊密團契中，被修剪稜角、學會深層相愛。","與來自不同專業背景的同學激盪，探索基督信仰對世界的實質影響力。"),
+S("神學院不僅是「傳道人養成所」，你更傾向把神學裝備看作：","領受差遣、預備奔赴廣大禾場的僕人演練。","建立一生純正信仰根基、抵禦世俗思潮的真理尋道之旅。","一場深刻的心靈更新與全人醫治，讓自己成為更健康的器皿。","跨領域的思維重組，學習用上帝的視角重新審視世界運作的法則。"),
+S("當你在信仰群體中看到問題或衝突時，你的直覺反應通常是：","挽起袖子採取行動，主動補上缺口或嘗試開闢新的服事模式。","回到聖經原則反思根本原因，思考是否有體制或觀念上的偏差。","走到情緒受傷的人身邊，安靜傾聽陪伴，扮演使人和睦的橋樑。","評估背後的溝通機制與文化背景，尋求更具前瞻性的解決方案。"),
+S("面對神學院嚴謹的學術論文與課業要求，你的心態是：","雖然充滿挑戰，但為了能更有力量地傳講真道，願意全力以赴。","非常興奮！這正是梳理清晰邏輯、深度建構論述的最佳操練。","把寫作當作向主獻上的禱告與反思，在文字中梳理生命的領悟。","期待透過嚴謹思辨，學會如何向懷疑論者或現代知識分子說清楚信仰。"),
+S("如果要選一門最想立即選修的神學院課程，你會選：","《講道法與宣教策略》：學習精準有力的福音傳遞與禾場拓展。","《系統神學與原文釋經》：深入鑽研歷代教義與聖經核心思想。","《教牧輔導與靈修學》：探討心靈關顧、內在醫治與默想祈禱。","《公共神學與當代倫理》：探討信仰如何介入科技、生態與職場挑戰。"),
+S("在日常生活中，朋友或弟兄姊妹最常在什麼情況下主動來找你？","需要號召推動一項計畫、需要方向指引或感到缺乏動力時。","遇到信仰疑難雜症、聖經難題，想找人理性討論時。","心情低落、遭遇挫折，需要一個安全不被論斷的耳朵傾聽時。","面臨職涯十字路口、人生重大選擇，需要宏觀視角分析時。"),
+S("關於讀神學院常面臨的「經濟與時間代價」，你的看法是：","冒險正是信心的起點！神既然呼召，就必有超乎所求的恩典供應。","視為專注求學的必要代價，只要能把真理學透，非常值得。","這是學習過簡約生活、體會窮人與弱勢者心境的寶貴生命功課。","視為人生最關鍵的永恆投資，暫時的慢下腳步是為了走更長遠的路。"),
+S("你認為現今世代的教會與世界，最迫切需要什麼樣的神國工人？","充滿熱忱與行動力、勇於走入未得之民的開拓型領袖。","扎根真理、能辨明時代虛妄思潮的教義守望者與學者。","具備同理心、能陪伴人心走過孤單與破碎的溫暖牧者。","能說當代語言、將福音轉化為文化影響力的橋樑型使者。"),
+S("閉上眼睛想像未來的你：完成神學院裝備後，最渴望看到的畫面是：","帶領許多失喪靈魂歸主，建立充滿活力與差傳使命的信仰群體。","用清晰扎實的話語教學造就信徒，使神兒女不再被異教之風搖動。","陪伴許多破碎疲憊的生命重拾尊嚴與喜樂，見證基督的慈愛。","激勵各行各業的信徒在職場活出天國價值，翻轉周遭文化與社群。"),
+{type:"multiple",q:"關於就讀神學院，你心中目前最好奇或感到疑惑的是哪些？",hint:"💡 可複選（若暫無疑惑也可直接點擊下一題），我們將在結果頁為你一一解答！",ops:[
+{id:1,title:"一定要確定「全職當牧師／傳道」才能去讀神學院嗎？",ans:"現代神學院提供多元學程（如基督教研究碩士 MTS、職場神學、教牧輔導、宣教學等）。許多弟兄姊妹是帶著職場專業、或是為了在帶職事奉中更深扎根而來裝備，神學教育是整全的門徒與思維塑造，並非只有講台牧會一條路。"},
+{id:2,title:"沒有學過希臘文、希伯來文，課業會不會難到無法畢業？",ans:"神學院的語言課程均從零基礎字母與發音開始教起，授課重點在於掌握研經工具與查證能力，而非要求成為語言學家。只要按部就班跟著進度練習，絕大多數同學都能順利掌握並應用於解經。"},
+{id:3,title:"學費與生活開銷要怎麼解決？會不會背負沉重學貸？",ans:"多數神學院設有完善的獎助學金、清寒補助、無息貸款與校內工讀機會；許多母會或支持團體也會針對受神呼召的肢體提供經常費資助。這段過程往往成為操練禱告仰望與經歷上帝豐富供應的信心旅程。"},
+{id:4,title:"讀了神學之後，靈命真的會變好嗎？會不會反而變得冷冰冰？",ans:"神學不是死記硬背知識，而是「在愛中尋求理解」。神學院極其重視全體晨禱、退修會與師徒同行（Mentorship），學習將學術探究化為對神的敬拜與頌讚，使理性與靈性並駕齊驅。"},
+{id:5,title:"我的聖經知識還不夠多、服事資歷淺，現在去讀會不會太早？",ans:"神學院正是為渴慕扎根的人預備的起跑點，而不是成果發表會！學校看重的是「受教的心（Teachable Heart）」與「忠心謙卑的態度」，只要在母會中有穩定的服事與教會推薦，就可以勇敢踏出探索的步伐。"},
+{id:6,title:"讀神學院是不是要全住宿？家人和原本的人際關係怎麼維持？",ans:"各神學院多有彈性學制（如全職住宿、走讀兼職、夜間修課或模組化密集班）。即使住宿，也能在有邊界的作息中學習平衡家庭、婚姻與親友互動，更是學習健康「安息日」生活節奏的契機。"}
+]}
 ];
-let curIdx=0,timer=null;
-const userAnswers=new Array(quizQuestions.length).fill(null);
+const LAST=quizQuestions.length-1;
+let curIdx=0,timer=null,userAnswers;
 const $=id=>document.getElementById(id);
-const qTextEl=$('question-text'),optContainer=$('options-container'),prevBtn=$('prev-btn'),nextBtn=$('next-btn');
+const introPanel=$('intro-panel'),quizPanel=$('quiz-panel'),resPanel=$('result-panel');
+const qTextEl=$('question-text'),qHintEl=$('question-hint'),optContainer=$('options-container'),prevBtn=$('prev-btn'),nextBtn=$('next-btn');
+function resetAnswers(){userAnswers=new Array(quizQuestions.length).fill(null);userAnswers[LAST]=[];}
+resetAnswers();
+
+function startQuiz(){introPanel.style.display='none';quizPanel.style.display='block';renderQ();window.scrollTo(0,0);}
 
 function renderQ(){
   const data=quizQuestions[curIdx];
   qTextEl.innerText=`${curIdx+1}. ${data.q}`;
+  qHintEl.innerText=data.hint||"";
   const percent=Math.round(((curIdx+1)/quizQuestions.length)*100);
   $('progress-bar').style.width=percent+'%';
   $('progress-text').innerText=`第 ${curIdx+1} / ${quizQuestions.length} 題`;
   $('progress-percent').innerText=percent+'%';
   optContainer.innerHTML='';
-  data.ops.forEach((item,i)=>{
-    const div=document.createElement('div');
-    div.className='option-item';
-    if(userAnswers[curIdx]===item.type)div.classList.add('selected');
-    div.innerHTML=`<strong>${String.fromCharCode(65+i)}.</strong> <span>${item.text}</span>`;
-    div.onclick=()=>chooseOpt(item.type);
-    optContainer.appendChild(div);
-  });
+  if(data.type==='single'){
+    data.ops.forEach((item,i)=>{
+      const div=document.createElement('div');
+      div.className='option-item';
+      if(userAnswers[curIdx]===item.key)div.classList.add('selected');
+      div.innerHTML=`<strong>${String.fromCharCode(65+i)}.</strong> <span>${item.text}</span>`;
+      div.onclick=()=>chooseSingle(item.key);
+      optContainer.appendChild(div);
+    });
+    nextBtn.disabled=(userAnswers[curIdx]===null);
+    nextBtn.innerText="下一題";
+  }else{
+    data.ops.forEach(item=>{
+      const div=document.createElement('div');
+      div.className='option-item';
+      const on=userAnswers[curIdx].includes(item.id);
+      if(on)div.classList.add('selected');
+      div.innerHTML=`<div class="checkbox-indicator">${on?'✓':''}</div><span>${item.title}</span>`;
+      div.onclick=()=>toggleMultiple(item.id);
+      optContainer.appendChild(div);
+    });
+    nextBtn.disabled=false;
+    nextBtn.innerText="查看探索報告與解惑";
+  }
   prevBtn.disabled=(curIdx===0);
-  nextBtn.disabled=(userAnswers[curIdx]===null);
-  nextBtn.innerText=(curIdx===quizQuestions.length-1)?"探索我的潛能特質":"下一題";
 }
-function chooseOpt(type){
-  userAnswers[curIdx]=type;
+function chooseSingle(key){
+  userAnswers[curIdx]=key;
   optContainer.querySelectorAll('.option-item').forEach((el,idx)=>{
-    el.classList.toggle('selected',quizQuestions[curIdx].ops[idx].type===type);
+    el.classList.toggle('selected',quizQuestions[curIdx].ops[idx].key===key);
   });
   nextBtn.disabled=false;
   clearTimeout(timer);
-  timer=setTimeout(()=>{
-    if(curIdx<quizQuestions.length-1){curIdx++;renderQ();}else showResult();
-  },240);
+  timer=setTimeout(()=>{if(curIdx<LAST){curIdx++;renderQ();}else showResult();},240);
+}
+function toggleMultiple(id){
+  let sel=userAnswers[curIdx]||[];
+  sel=sel.includes(id)?sel.filter(x=>x!==id):[...sel,id];
+  userAnswers[curIdx]=sel;
+  renderQ();
 }
 prevBtn.onclick=()=>{clearTimeout(timer);if(curIdx>0){curIdx--;renderQ();}};
-nextBtn.onclick=()=>{clearTimeout(timer);if(curIdx<quizQuestions.length-1){curIdx++;renderQ();}else showResult();};
+nextBtn.onclick=()=>{clearTimeout(timer);if(curIdx<LAST){curIdx++;renderQ();}else showResult();};
 
 const profileMap={
-A:{title:"開拓先鋒型・福音實踐者",
-traits:"你具備充沛的行動力與傳承福音的熱情，對未得之地和失喪靈魂充滿負擔。你樂於走出舒適圈，是信仰群體中極具推進力的前鋒。",
-encourage:"禾場廣大，神正需要你那顆不甘平庸、勇於跨界的熱忱心志！神學院不是要把你關在冷清的書齋，而是為你的熱情裝上穩健的講道、神學根基與牧養工具。走進神學院，你將為未來的宣教與開拓裝備出一把鋒利而合用的利刃！"},
-B:{title:"真理守望型・神學建構者",
-traits:"你喜愛深入思考、探究聖經字詞與神學教義架構，具備敏銳的求知慾與條理分明的思辨邏輯，深信真理能使人得自由。",
-encourage:"在這個資訊碎片化、真假思潮混雜的世代，清晰扎實的教義根基何等珍貴！你的專注與嚴謹是神給予的獨特託付。神學院豐富的思想寶庫與原文研讀正在等候你，進入神學院，你將被塑造成為守望教會真理、造就無數信徒的忠心教師！"},
-C:{title:"心靈牧者型・生命陪伴者",
-traits:"你有一顆善於傾聽、敏銳同理的心，對人的破碎、眼淚與孤單特別能感同身受。身邊的人在脆弱時往往喜歡向你敞開，尋求心靈的慰藉。",
-encourage:"當代人活在高壓疏離中，最渴慕的正是基督那份有溫度的真實同在。在神學院中，透過密集的團契磨練、教牧輔導與靈修學陶冶，你與生俱來的溫柔同理將被提煉為堅韌而有智慧的牧養恩賜，成為醫治流淚之人的生命出口！"},
-D:{title:"時代橋樑型・國度轉化者",
-traits:"你擁有宏觀的思維格局，熱切關注信仰與職場、當代文化、社會議題的交集，渴望看見信仰不再被框在四面牆內，而是落實於生活每個層面。",
-encourage:"神給了你一雙看見時代趨勢的眼睛！神學不是過時的古老知識，而是解讀宇宙與社會最高維度的智慧。神學院的跨學科思辨訓練，能幫助你將永恆真理轉化為當代語言，賦予你進入職場、公共領域作國度使者的廣大視野！"}
+A:{title:"開拓先鋒型・福音實踐者",traits:"你具備充沛的行動力與傳遞福音的熱情，對未得之地和失喪靈魂充滿負擔。你樂於走出舒適圈，是信仰群體中極具推進力的前鋒。",encourage:"禾場廣大，神正需要你那顆不甘平庸、勇於跨界的熱忱心志！神學院不是要把你關在冷清的書齋，而是為你的熱情裝上穩健的講道、神學根基與牧養工具。走進神學院，你將為未來的宣教與開拓裝備出一把鋒利而合用的利刃！"},
+B:{title:"真理守望型・神學建構者",traits:"你喜愛深入思考、探究聖經字詞與神學教義架構，具備敏銳的求知慾與條理分明的思辨邏輯，深信真理能使人得自由。",encourage:"在這個資訊碎片化、真假思潮混雜的世代，清晰扎實的教義根基何等珍貴！你的專注與嚴謹是神給予的獨特託付。神學院豐富的思想寶庫與原文研讀正在等候你，進入神學院，你將被塑造成為守望教會真理、造就無數信徒的忠心教師！"},
+C:{title:"心靈牧者型・生命陪伴者",traits:"你有一顆善於傾聽、敏銳同理的心，對人的破碎、眼淚與孤單特別能感同身受。身邊的人在脆弱時往往喜歡向你敞開，尋求心靈的慰藉。",encourage:"當代人活在高壓疏離中，最渴慕的正是基督那份有溫度的真實同在。在神學院中，透過密集的團契磨練、教牧輔導與靈修學陶冶，你與生俱來的溫柔同理將被提煉為堅韌而有智慧的牧養恩賜，成為醫治流淚之人的生命出口！"},
+D:{title:"時代橋樑型・國度轉化者",traits:"你擁有宏觀的思維格局，熱切關注信仰與職場、當代文化、社會議題的交集，渴望看見信仰不再被框在四面牆內，而是落實於生活每個層面。",encourage:"神給了你一雙看見時代趨勢的眼睛！神學不是過時的古老知識，而是解讀宇宙與社會最高維度的智慧。神學院的跨學科思辨訓練，能幫助你將永恆真理轉化為當代語言，賦予你進入職場、公共領域作國度使者的廣大視野！"}
 };
 const labelMap={A:'開拓實踐傾向',B:'真理思辨傾向',C:'心靈關顧傾向',D:'時代整合傾向'};
 
 function showResult(){
-  $('quiz-panel').style.display='none';
-  $('result-panel').style.display='block';
+  quizPanel.style.display='none';resPanel.style.display='block';
   const counts={A:0,B:0,C:0,D:0};
-  userAnswers.forEach(a=>{if(a)counts[a]++;});
+  for(let i=0;i<LAST;i++){const a=userAnswers[i];if(a)counts[a]++;}
   let top='A',max=-1;
   for(const [k,v] of Object.entries(counts)){if(v>max){max=v;top=k;}}
   const info=profileMap[top];
   $('result-title').innerText=info.title;
   $('result-traits').innerText=info.traits;
   $('result-encourage').innerText=info.encourage;
-  const dc=$('dist-container');
-  dc.innerHTML='';
+  const dc=$('dist-container');dc.innerHTML='';
   for(const [k,val] of Object.entries(counts)){
-    const item=document.createElement('div');
-    item.className='dist-item';
-    item.innerHTML=`<span>${labelMap[k]}</span><strong>${val} / 10 題</strong>`;
-    dc.appendChild(item);
+    const d=document.createElement('div');d.className='dist-item';
+    d.innerHTML=`<span>${labelMap[k]}</span><strong>${val} / 10 題</strong>`;
+    dc.appendChild(d);
+  }
+  const ids=userAnswers[LAST]||[],fl=$('faq-list');fl.innerHTML='';
+  if(ids.length===0){
+    fl.innerHTML=`<div class="faq-card" style="border-left-color:var(--ok)"><div class="faq-q">🎉 你心中目前充滿信心與平安！</div><div class="faq-a">若未來在尋求神學裝備的路上有任何新的問題，歡迎隨時與母會牧者長輩聊聊，或報名神學院的「開放日（Open Day）」親自走訪校園喔！</div></div>`;
+  }else{
+    quizQuestions[LAST].ops.forEach(op=>{
+      if(!ids.includes(op.id))return;
+      const c=document.createElement('div');c.className='faq-card';
+      c.innerHTML=`<div class="faq-q">❓ ${op.title}</div><div class="faq-a">${op.ans}</div>`;
+      fl.appendChild(c);
+    });
   }
   window.scrollTo(0,0);
 }
 function restartQuiz(){
-  curIdx=0;userAnswers.fill(null);
-  $('result-panel').style.display='none';
-  $('quiz-panel').style.display='block';
-  renderQ();
+  clearTimeout(timer);curIdx=0;resetAnswers();
+  resPanel.style.display='none';quizPanel.style.display='none';introPanel.style.display='flex';
+  window.scrollTo(0,0);
 }
-renderQ();
 </script>
 </body>
 </html>
